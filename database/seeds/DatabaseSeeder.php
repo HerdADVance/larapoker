@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+    	DB::table('users')->insert([
+    		['username' => 'ballsoherd', 'name' => 'Alex', 'email' => 'avance@bulldogcreative.com', 'password' =>'levispenis'],
+    	]);
+
         DB::table('cards')->insert([
         	['rank' => 2, 'face' => '2', 'suit' => 'C'],
 			['rank' => 3, 'face' => '3', 'suit' => 'C'],
