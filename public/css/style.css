@@ -1,0 +1,101 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+*:focus{
+	outline: none;
+}
+
+.mob{
+	display: none;
+}
+
+html{
+	display: flex;
+}
+
+body{
+	background: radial-gradient(ellipse at center, #257715 0%,#669b6e 17%,#3a7c45 33%,#005602 67%,#003505 83%,#001102 100%);
+	display: flex;
+	flex-direction: column;
+	font-family: "Nunito",sans-serif;
+	font-size: 16px;
+	min-height: 100vh;
+	width: 100%;
+}
+main{
+	flex-grow: 1;
+}
+
+.header,.footer{
+	flex-shrink: 0;
+}
+
+section{
+	padding-bottom: 3em;
+	padding-top: 3em;
+}
+
+/* BUTTONS */
+button{
+	cursor: pointer;
+}
+.btn{
+	color: white;
+	font-size: 18px;
+	margin-bottom: 25px;
+	transition: background 0.25s;
+}
+.btn a{
+	color: white;
+	display: block;
+	height: 100%;
+	padding: 10px 50px;
+	text-decoration: none;
+	width: 100%;
+}
+
+/* TABLES */
+table{
+	border-collapse: collapse;
+	margin-bottom: 25px;
+	width: 50%;
+}
+th, td{
+	border: 1px solid #EEE;
+	padding: 5px;
+	text-align: center;
+}
+th{
+	background: white;
+	color: black;
+}
+td{
+	
+}
+
+/* COLORS */
+.start{background: mediumseagreen;}
+.start:hover{background: green;}
+
+
+
+
+
+.container{
+	margin: 50px 10%;
+	width: 80%;
+}
+
+h1{
+	color: white;
+	font-size: 32px;
+	margin-bottom: 24px;
+}
+h2{
+	color: white;
+	font-size: 24px;
+	margin-bottom: 20px;
+}

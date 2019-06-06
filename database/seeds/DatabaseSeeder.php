@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Card;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
     	DB::table('users')->insert([
     		['username' => 'ballsoherd', 'name' => 'Alex', 'email' => 'avance@bulldogcreative.com', 'password' =>'levispenis'],
+    		['username' => 'levi', 'name' => 'Levi', 'email' => 'ldurfee@bulldogcreative.com', 'password' =>'levispenis']
     	]);
 
         DB::table('cards')->insert([
@@ -69,6 +72,95 @@ class DatabaseSeeder extends Seeder
 			['rank' => 12, 'face' => 'Q', 'suit' => 'S'],
 			['rank' => 13, 'face' => 'K', 'suit' => 'S'],
 			['rank' => 14, 'face' => 'A', 'suit' => 'S']
+        ]);
+
+        $cards = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52];
+        shuffle($cards);
+
+        DB::table('games')->insert([
+        	['status' => 0, 'round' => 1]
+        ]);
+
+        DB::table('players')->insert([
+        	['user_id' => 1, 'game_id' => 1, 'score' => 0, 'result' => 0],
+        	['user_id' => 2, 'game_id' => 1, 'score' => 0, 'result' => 0]
+        ]);
+
+        DB::table('hands')->insert([
+        	[
+        		'player_id' => 1, 
+        		'card1_id' => $cards[0], 
+        		'card2_id' => $cards[1], 
+        		'card3_id' => $cards[2], 
+        		'card4_id' => $cards[3], 
+        		'card5_id' => $cards[4], 
+        		'card6_id' => $cards[5], 
+        		'card7_id' => $cards[6], 
+        		'card8_id' => $cards[7], 
+        		'card9_id' => $cards[8], 
+        		'card10_id' => $cards[9] 
+        	],
+        	[
+        		'player_id' => 2, 
+        		'card1_id' => $cards[10], 
+        		'card2_id' => $cards[11], 
+        		'card3_id' => $cards[12], 
+        		'card4_id' => $cards[13], 
+        		'card5_id' => $cards[14], 
+        		'card6_id' => $cards[15], 
+        		'card7_id' => $cards[16], 
+        		'card8_id' => $cards[17], 
+        		'card9_id' => $cards[18], 
+        		'card10_id' => $cards[19] 
+        	]
+        ]);
+
+        DB::table('boards')->insert([
+        	[
+        		'game_id' => 1, 
+        		'round' => 1, 
+        		'card1_id' => $cards[20], 
+        		'card2_id' => $cards[21], 
+        		'card3_id' => $cards[22], 
+        		'card4_id' => $cards[23], 
+        		'card5_id' => $cards[24]  
+        	],
+        	[
+        		'game_id' => 1, 
+        		'round' => 2, 
+        		'card1_id' => $cards[25], 
+        		'card2_id' => $cards[26], 
+        		'card3_id' => $cards[27], 
+        		'card4_id' => $cards[28], 
+        		'card5_id' => $cards[29]  
+        	],
+        	[
+        		'game_id' => 1, 
+        		'round' => 3, 
+        		'card1_id' => $cards[30], 
+        		'card2_id' => $cards[31], 
+        		'card3_id' => $cards[32], 
+        		'card4_id' => $cards[33], 
+        		'card5_id' => $cards[34]  
+        	],
+        	[
+        		'game_id' => 1, 
+        		'round' => 4, 
+        		'card1_id' => $cards[35], 
+        		'card2_id' => $cards[36], 
+        		'card3_id' => $cards[37], 
+        		'card4_id' => $cards[38], 
+        		'card5_id' => $cards[39]  
+        	],
+        	[
+        		'game_id' => 1, 
+        		'round' => 5, 
+        		'card1_id' => $cards[40], 
+        		'card2_id' => $cards[41], 
+        		'card3_id' => $cards[42], 
+        		'card4_id' => $cards[43], 
+        		'card5_id' => $cards[44]  
+        	]
         ]);
     }
 }

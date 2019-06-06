@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+use App\Game;
+
 class GamesController extends Controller
 {
     /**
@@ -23,7 +26,10 @@ class GamesController extends Controller
      */
     public function create()
     {
-        // Create a new game
+        $user_id = \Auth::user()->id;
+        $game = Game::all()->last(); // this might be reliable if more than one game created in same second
+
+        var_dump($user_id);
     }
 
     /**
