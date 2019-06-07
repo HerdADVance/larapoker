@@ -41,6 +41,9 @@
         ]
     },
     "autoload-dev": {
+        "files" : [
+            "app/Http/Helpers/game.php"
+        ],
         "psr-4": {
             "Tests\\": "tests/"
         }

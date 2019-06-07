@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
 
     	DB::table('users')->insert([
-    		['username' => 'ballsoherd', 'name' => 'Alex', 'email' => 'avance@bulldogcreative.com', 'password' =>'levispenis'],
-    		['username' => 'levi', 'name' => 'Levi', 'email' => 'ldurfee@bulldogcreative.com', 'password' =>'levispenis']
+    		['username' => 'ballsoherd', 'name' => 'Alex', 'email' => 'avance@bulldogcreative.com', 'password' =>bcrypt('levispenis')],
+    		['username' => 'levi', 'name' => 'Levi', 'email' => 'ldurfee@bulldogcreative.com', 'password' =>bcrypt('levispenis')]
     	]);
 
         DB::table('cards')->insert([

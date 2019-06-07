@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/games/create', 'GamesController@create');
+Route::get('/games/{id}', 'GamesController@show');

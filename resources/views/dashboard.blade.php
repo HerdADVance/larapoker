@@ -17,37 +17,22 @@
 
     <h2>Current Games</h2>
 
-    @foreach($players as $player)
-        <p>{{$player->game}}</p>
-    @endforeach
-
-    <table>
+    <table class="current-games">
         <tr>
             <th>Opponent</th>
             <th>Score</th>
-            <th>Status</th>
+            <th>Round</th>
+            <th></th>
         </tr>
 
-        <tr>
-            <td>Walrus</td>
-            <td>2-1</td>
-            <td>Play</td>
-        </tr>
-        <tr>
-            <td>Otter</td>
-            <td>2-0</td>
-            <td>View</td>
-        </tr>
-        <tr>
-            <td>Gopher</td>
-            <td>2-2</td>
-            <td>Play</td>
-        </tr>
-        <tr>
-            <td>Penguin</td>
-            <td>1-2</td>
-            <td>Play</td>
-        </tr>
+        @foreach($players as $player)
+            <tr>
+                <td>{{$player->opponentName}}</td>
+                <td>{{$player->score}}-{{$player->opponentScore}}</td>
+                <td>{{$player->game->round}}</td>
+                <td><a href="/games/{{$player->game->id}}">Play</a></td>
+            </tr>
+        @endforeach
     </table>
 </div>
 

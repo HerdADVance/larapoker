@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Game;
+use App\Card;
 
 class GamesController extends Controller
 {
@@ -52,7 +53,33 @@ class GamesController extends Controller
     public function show($id)
     {
         // Show the particular game and only the user's cards
+
+        $user = \Auth::user();
+        $game = Game::find($id);
+        $players = $game->player()->with('hand')->get();
+        $viewableHand = false;
+
+        foreach($players as $player){
+            if($player->user_id === $user->id){
+                $viewableHand = [
+                    Card::find($player->hand->card1_id),
+                    Card::find($player->hand->card2_id),
+                    Card::find($player->hand->card3_id),
+                    Card::find($player->hand->card4_id),
+                    Card::find($player->hand->card5_id),
+                    Card::find($player->hand->card6_id),
+                    Card::find($player->hand->card7_id),
+                    Card::find($player->hand->card8_id),
+                    Card::find($player->hand->card9_id),
+                    Card::find($player->hand->card10_id)
+                ];
+            }
+        }
+
+        return view('games/show', compact('user', 'game', 'players', 'viewableHand'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -86,5 +113,11 @@ class GamesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function tester()
+    {
+        return "TEST";
     }
 }

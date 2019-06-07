@@ -65,7 +65,9 @@ table{
 }
 th, td{
 	border: 1px solid #EEE;
-	padding: 5px;
+	color: white;
+	font-size: 18px;
+	padding: 10px;
 	text-align: center;
 }
 th{
@@ -79,6 +81,9 @@ td{
 /* COLORS */
 .start{background: mediumseagreen;}
 .start:hover{background: green;}
+
+.neutral{background: #666;}
+.neutral:hover{background: #333;}
 
 
 

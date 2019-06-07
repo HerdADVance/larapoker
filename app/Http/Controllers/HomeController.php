@@ -28,8 +28,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        $players = \Auth::user()->players()->with('hand', 'game')->get();
         $user = \Auth::user();
+        $players = \Auth::user()->players()->with('game')->get();
 
         return view('dashboard', compact('players', 'user'));
     }
