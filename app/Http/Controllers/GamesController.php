@@ -57,6 +57,7 @@ class GamesController extends Controller
         $user = \Auth::user();
         $game = Game::find($id);
         $players = $game->player()->with('hand')->get();
+        $boards = $game->board()->get();
         $viewableHand = false;
 
         foreach($players as $player){
@@ -76,7 +77,18 @@ class GamesController extends Controller
             }
         }
 
-        return view('games/show', compact('user', 'game', 'players', 'viewableHand'));
+        $viewableBoards = [];
+        for($i = 0; $i < $game->round; $i++){
+            $viewableBoards[] = [
+                Card::find($boards[$i]->card1_id),
+                Card::find($boards[$i]->card2_id),
+                Card::find($boards[$i]->card3_id),
+                Card::find($boards[$i]->card4_id),
+                Card::find($boards[$i]->card5_id),
+            ];
+        }
+
+        return view('games/show', compact('user', 'game', 'players', 'viewableHand', 'viewableBoards'));
     }
 
 
