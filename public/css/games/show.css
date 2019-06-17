@@ -1,3 +1,9 @@
+/* CARD */
+.card{
+	user-select: none;
+}
+
+
 /* PLAYER */
 .player{
 	position: absolute;
@@ -18,14 +24,19 @@
 	margin: 0px auto;
 }
 
-.player-cards img{
+.player-card{
 	border-radius: 5px;
-	cursor: pointer;
 	margin-right: -30px;
 	width: 80px;
 }
 
+.player-card.selected{
+	padding-bottom: 10px;
+}
 
+.user-is-player .card{
+	cursor: pointer;
+}
 
 /* PLAYER INFO BOX */
 .player-info{
@@ -62,6 +73,15 @@
 }
 
 
+/* PLAYER ACTION BUTTONS */
+#play-hand{
+	bottom: 0;
+	font-size: 20px;
+	left: 0;
+	padding: 10px 25px;
+	position: absolute;
+}
+
 /* BOARD */
 .board{
 	height: 100%;
@@ -76,13 +96,10 @@
 	width: 100%;
 }
 
-.board-cards img{
+.board-cards .card{
 	border-radius: 5px;
 	width: 100px;
 }
 
-/* CARD */
-.card{
-	user-select: none;
-}
+
 

@@ -28,7 +28,7 @@
 
 			    	@foreach($viewableHand as $card)
 			    		<img 
-			    			class="card" 
+			    			class="card player-card" 
 			    			src="/img/cards/{{$card->face}}{{$card->suit}}.png"
 			    			data-face="{{$card->face}}"
 			    			data-rank="{{$card->rank}}" 
@@ -40,7 +40,7 @@
 			    	
 			    	@for($i=0; $i < 10; $i++)
 			    		<img 
-			    			class="card" 
+			    			class="card player-card" 
 			    			src="/img/cards/back.png"
 			    		>
 			    	@endfor
@@ -65,10 +65,11 @@
 		</div>
 	</div>
 
-	@if($player->user_id === $user->id)
+	@if($player->user_id < 5)
 	    <div style="clear:both;">
 	    	<button class="btn neutral" id="sort-rank">Sort By Rank</button>
 	    	<button class="btn neutral" id="sort-suit">Sort By Suit</button>
+	    	<button class="btn neutral" id="play-hand">Play Hand</button>
 		</div>
 	@endif
     
