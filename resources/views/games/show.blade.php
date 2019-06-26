@@ -30,6 +30,7 @@
 			    		<img 
 			    			class="card player-card" 
 			    			src="/img/cards/{{$card->face}}{{$card->suit}}.png"
+			    			data-id="{{$card->id}}"
 			    			data-face="{{$card->face}}"
 			    			data-rank="{{$card->rank}}" 
 			    			data-suit="{{$card->suit}}"
@@ -57,6 +58,7 @@
 	    		<img 
 	    			class="card" 
 	    			src="/img/cards/{{$card->face}}{{$card->suit}}.png"
+	    			data-id="{{$card->id}}"
 	    			data-face="{{$card->face}}"
 	    			data-rank="{{$card->rank}}" 
 	    			data-suit="{{$card->suit}}"
@@ -69,7 +71,19 @@
 	    <div style="clear:both;">
 	    	<button class="btn neutral" id="sort-rank">Sort By Rank</button>
 	    	<button class="btn neutral" id="sort-suit">Sort By Suit</button>
-	    	<button class="btn neutral" id="play-hand">Play Hand</button>
+	    	
+	    	<form action="/games/{{$game->id}}" method="POST">
+	    		
+	    		{{ csrf_field() }}
+                {{ method_field('PUT') }}
+	    		
+	    		<input type="hidden" class="card-to-play" id="card-to-play-1" name="card_to_play_1">
+	    		<input type="hidden" class="card-to-play" id="card-to-play-2" name="card_to_play_2">
+	    		
+	    		<button class="btn neutral" id="play-hand" type="submit">Play Hand</button>
+
+	    	</form>
+
 		</div>
 	@endif
     

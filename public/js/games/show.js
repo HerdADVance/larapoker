@@ -11,6 +11,11 @@ $('.user-is-player .player-card').click(function(){
 	var numSelected = $('.user-is-player .player-card.selected').length
 	if(numSelected === 2) $('#play-hand').removeClass('neutral').addClass('start')
 		else $('#play-hand').removeClass('start').addClass('neutral')
+
+	$('.card-to-play').val('')		
+	for(var i=0; i<numSelected; i++){
+		$('#card-to-play-' + (i+1)).val($('.user-is-player .player-card.selected:eq(' + i + ')').attr('data-id'))
+	}
 })
 
 $('#sort-rank').click(function(){
