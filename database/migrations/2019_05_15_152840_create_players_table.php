@@ -17,8 +17,9 @@ class CreatePlayersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('game_id')->index();
-            $table->integer('score');
-            $table->integer('result');
+            $table->integer('score')->default(0);
+            $table->integer('result')->default(0);
+            $table->integer('played')->default(0);
             $table->timestamps();
         });
     }

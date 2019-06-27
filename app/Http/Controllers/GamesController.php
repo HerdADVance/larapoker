@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Game;
+use App\Player;
 use App\Card;
 
 class GamesController extends Controller
@@ -114,19 +115,25 @@ class GamesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Take user's selected hands and validate with info in DB
-
         $user = \Auth::user();
         $game = Game::find($id);
         $players = $game->player()->with('hand')->get();
         $boards = $game->board()->get();
         $viewableHand = false;
 
-        $cardsPlayed = [(int)$request->card_to_play_1, (int)$request->card_to_play_2];
+        // Get opponent and see if they've played
+        $opponentPlayer = Player::where([
+            ['game_id', $game->id],
+            ['user_id', '!=', $user->id]
+        ])->first();
+        $opponentHasPlayed = $opponentPlayer->played;
 
+        // Take cards played from request and make sure there's 2 and they're not the same card
+        $cardsPlayed = [(int)$request->card_to_play_1, (int)$request->card_to_play_2];
         if($cardsPlayed[0] === $cardsPlayed[1]) {} // throw error
         if(sizeof($cardsPlayed) !== 2) {} // throw error
 
+        // Begin check for player matching user to validate cards and then take appropriate action
         foreach($players as $player){
             if($player->user_id === $user->id){ // player matches user
                 
@@ -165,12 +172,47 @@ class GamesController extends Controller
                 if($validCardCount === 2){
 
                     foreach($toMarkAsPlayed as $card){ // marking played cards as played in user's hand
-                        $player->hand->{'card' . $card . '_played'} = 1;
-                        $player->hand->save();
+                        $player->hand->{'card' . $card . '_played'} = $game->round;
                     }
 
-                    // update player played status
-                    // check to see if opponent has played
+                    $player->played = 1;
+                    $player->hand->save();
+                    $player->save();
+
+                    //($opponentHasPlayed === 1){
+                        //dd('Opponent played');
+                        $board = [
+                            Card::find($boards[$game->round - 1]->card1_id),
+                            Card::find($boards[$game->round - 1]->card2_id),
+                            Card::find($boards[$game->round - 1]->card3_id),
+                            Card::find($boards[$game->round - 1]->card4_id),
+                            Card::find($boards[$game->round - 1]->card5_id),
+                        ];
+
+                        $playerHand = [
+                            Card::find($cardsPlayed[0]),
+                            Card::find($cardsPlayed[1]),
+                        ];
+
+                        $sevenCards = array_merge($board, $playerHand);
+
+                        foreach($sevenCards as $index=>$c){
+                            $sevenCards[$index] = $c->face . $c->suit;
+                        }
+
+                        // animations for opponent's cards turning
+                        // compare cards
+                        // update score
+                        // update round
+                        // reset played to false
+                        // animations for new board
+                        // message to play next round
+                    //} else{
+                        //dd('Opponent has not played');
+                        // update view to move cards as if they've been played
+                        // update view to say waiting for opponent
+                    //}
+
                     // update round status if need be
                     // aminations of opponent's card if need be
                     // update view
@@ -179,6 +221,8 @@ class GamesController extends Controller
                     // throw error for not having 2 valid cards
                 }
 
+
+                // Start working on new view
                 if($player->hand->card1_played === 0) $viewableHand[] = Card::find($player->hand->card1_id);
                 if($player->hand->card2_played === 0) $viewableHand[] = Card::find($player->hand->card2_id);
                 if($player->hand->card3_played === 0) $viewableHand[] = Card::find($player->hand->card3_id);
